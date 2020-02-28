@@ -1,5 +1,11 @@
 import java.util.function.Predicate
 
+/**
+ * UniqueList
+ *
+ * An implementation of [List] that is random accessible
+ * and contains unique elements.
+ */
 class UniqueList<E : UniqueList.Unique<T>, T> : ArrayList<E>() {
 
     /**
@@ -82,15 +88,32 @@ class UniqueList<E : UniqueList.Unique<T>, T> : ArrayList<E>() {
         return super.retainAll(elements)
     }
 
+    /**
+     * Track elements about to be added.
+     *
+     * This is called before adding the elements to this instance.
+     *
+     * @param filtered [List] of elements to track as unique
+     * @throws [IllegalArgumentException] if the given list is not of unique elements
+     */
     private fun trackElements(filtered: List<E>) {
-        val filteredIds = filtered.map { it.id }
-        set.addAll(filteredIds)
+        val filteredSet = filtered.map { it.id }.toSet()
+
+        require(filteredSet.size == filtered.size) {
+            "Elements must be unique according to their id"
+        }
+
+        set.addAll(filteredSet)
     }
 
+    /**
+     * Filter the elements
+     *
+     * @param elements [Collection] of elements to filter
+     * @return [List] of elements not contained in this instance's bucket.
+     */
     private fun filterElements(elements: Collection<E>): List<E> {
-        return elements.filterNot { element ->
-            set.contains(element.id)
-        }
+        return elements.distinctBy { it.id }.filterNot { set.contains(it.id) }
     }
 
     /**

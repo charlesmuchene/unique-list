@@ -57,6 +57,8 @@ Output on the console is:
 [Person(name=Charlo, ssn=456-7890), Person(name=Maxwell, ssn=6784-4325)]
 ```
 
+A use case in Android's RecyclerViewAdapter is described in this [post](https://medium.com/@charlesmuchene/unique-items-list-kotlin-9be2f6a0c109).
+
 #### Caveat
 `UniqueList` imposes conformance to the `Unique` interface on 
 the elements to be stored hence useful for container types you own.

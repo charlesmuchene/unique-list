@@ -56,6 +56,11 @@ Output on the console is:
 ```kotlin
 [Person(name=Charlo, ssn=456-7890), Person(name=Maxwell, ssn=6784-4325)]
 ```
+
+#### Caveat
+`UniqueList` imposes conformance to the `Unique` interface on 
+the elements to be stored hence useful for container types you own.
+
 ## License
 
 MIT license. See the [LICENSE file](LICENSE) for details.

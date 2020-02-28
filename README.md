@@ -28,6 +28,34 @@ provides us with a lean addition in the storage for the required benefits.
 
 * `UniqueList` is not thread safe.
 
+## Usage
+Let your entity implement `Unique` interface to provide the property that will be unique -- 
+most probably what identifies this instance. For example,
+
+```kotlin
+class Person(val name: String, val ssn: String) : UniqueList.Unique<String> {
+    override val id: String
+        get() = ssn
+}
+```
+Use this instance in the `UniqueList` as shown next.
+```kotlin
+val person1 = Person("Charlo", "456-7890")
+val person2 = Person("Charlo same ssn", "456-7890")
+val person3 = Person("Maxwell", "6784-4325")
+
+val uniqueList = UniqueList<Person, String>()
+
+uniqueList.addAll(listOf(person1, person2, person3))
+
+println(uniqueList)
+```
+
+Output on the console is:
+
+```kotlin
+[Person(name=Charlo, ssn=456-7890), Person(name=Maxwell, ssn=6784-4325)]
+```
 ## License
 
 MIT license. See the [LICENSE file](LICENSE) for details.

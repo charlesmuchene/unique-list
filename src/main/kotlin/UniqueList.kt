@@ -5,6 +5,9 @@ import java.util.function.Predicate
  *
  * An implementation of [List] that is random accessible
  * and contains unique elements.
+ *
+ * @param E The type of elements stored in this list
+ * @param T The type of the identifying property of [E]
  */
 class UniqueList<E : UniqueList.Unique<T>, T> : ArrayList<E>() {
 
